@@ -1,53 +1,575 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Personal Website</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>John Doe - Personal Portfolio</title>
+
+  <!-- Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+
+    .header-scrolled {
+      background-color: white;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+    .header-transparent {
+      background-color: transparent;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+    .mobile-menu { display: none; }
+    .mobile-menu.active { display: block; }
+
+    @media (min-width: 768px) {
+      .timeline-item:nth-child(even) .timeline-content {
+        margin-left: auto;
+        padding-left: 3rem;
+        padding-right: 0;
+      }
+      .timeline-item:nth-child(odd) .timeline-content {
+        margin-right: auto;
+        padding-right: 3rem;
+        padding-left: 0;
+      }
+    }
+  </style>
 </head>
-<body>
+
+<body class="min-h-screen bg-gray-50 text-gray-800">
   <!-- Header -->
-  <header>
-    <h1>Hi, I’m Nishaanthini Gnanavel 👋</h1>
-    <p>PhD Student | Machine Learning Engineer | Lifelong Learner</p>
+  <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 header-transparent">
+    <div class="container mx-auto px-4 flex justify-between items-center">
+      <div class="text-xl font-bold">
+        <span class="text-blue-600"></span>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex space-x-8" aria-label="Primary">
+        <button onclick="scrollToSection('about')" class="font-medium hover:text-blue-600 transition-colors capitalize">About</button>
+        <button onclick="scrollToSection('projects')" class="font-medium hover:text-blue-600 transition-colors capitalize">Projects</button>
+        <button onclick="scrollToSection('publications')" class="font-medium hover:text-blue-600 transition-colors capitalize">Publications</button>
+        <button onclick="scrollToSection('achievements')" class="font-medium hover:text-blue-600 transition-colors capitalize">Achievements</button>
+        <button onclick="scrollToSection('contact')" class="font-medium hover:text-blue-600 transition-colors capitalize">Contact</button>
+      </nav>
+
+      <!-- Mobile Navigation Toggle -->
+      <button id="menuToggle" class="md:hidden text-gray-700" aria-label="Toggle menu">
+        <i id="menuIcon" data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation Menu -->
+    <div id="mobileMenu" class="md:hidden bg-white shadow-lg absolute top-full left-0 right-0 mobile-menu">
+      <div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
+        <button onclick="scrollToSection('about')" class="font-medium hover:text-blue-600 transition-colors text-left py-2 capitalize">About</button>
+        <button onclick="scrollToSection('projects')" class="font-medium hover:text-blue-600 transition-colors text-left py-2 capitalize">Projects</button>
+        <button onclick="scrollToSection('publications')" class="font-medium hover:text-blue-600 transition-colors text-left py-2 capitalize">Publications</button>
+        <button onclick="scrollToSection('achievements')" class="font-medium hover:text-blue-600 transition-colors text-left py-2 capitalize">Achievements</button>
+        <button onclick="scrollToSection('contact')" class="font-medium hover:text-blue-600 transition-colors text-left py-2 capitalize">Contact</button>
+      </div>
+    </div>
   </header>
 
-  <!-- Navigation -->
-  <nav>
-    <a href="#about">About</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
-  </nav>
+  <main>
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center bg-gradient-to-br from-blue-50 to-indigo-50">
+      <div
+        class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1504639725590-34d0984388bd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80')] bg-cover bg-center opacity-10">
+      </div>
+      <div class="container mx-auto px-4 z-10">
+        <div class="max-w-3xl">
+          <h1 class="text-5xl md:text-6xl font-bold mb-6">
+            Hello, I'm <span class="text-blue-600">Gnanavel Nishaanthini</span>
+          </h1>
+          <p class="text-xl md:text-2xl text-gray-700 mb-8">
+            A passionate researcher, developer and innovator with expertise in technology and science and creating innovative solutions that bridge science and technology..
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <button onclick="scrollToSection('contact')" class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-lg">
+              Contact Me
+            </button>
+            <button onclick="scrollToSection('projects')" class="px-6 py-3 bg-white text-blue-600 border border-blue-600 rounded-lg hover:bg-blue-50 transition-colors">
+              View My Work
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <!-- About Section -->
-  <section id="about">
-    <h2>About Me</h2>
-    <p>
-      I’m passionate about AI, data visualization, and building applications 
-      that solve real-world problems. This is my personal website hosted on GitHub Pages.
-    </p>
-  </section>
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold mb-2">About Me</h2>
+      <div class="w-20 h-1 bg-blue-600 mx-auto"></div>
+    </div>
 
-  <!-- Projects Section -->
-  <section id="projects">
-    <h2>Projects</h2>
-    <ul>
-      <li><b>SegXperts</b> – AI-powered cervical cell segmentation app with explainable AI.</li>
-    </ul>
-  </section>
+    <div class="flex flex-col md:flex-row items-center gap-12">
+      <!-- Profile Image -->
+      <div class="w-full md:w-1/3">
+        <div class="rounded-lg overflow-hidden shadow-lg">
+          <img
+            src="assets/myimage.jpeg"
+            alt="Profile" class="w-full h-auto"/>
+        </div>
+      </div>
 
-  <!-- Contact Section -->
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>📧 Email: <a href="mailto:gnishaanthini@gmail.com">gnishaanthini@gmail.com</a></p>
-    <p>🔗 GitHub: <a href="https://github.com/gnishaanthini" target="_blank">github.com/gnishaanthini</a></p>
-    <p>💼 LinkedIn: <a href="https://linkedin.com/in/gnishaanthini" target="_blank">linkedin.com/in/gnishaanthini</a></p>
-  </section>
+      <!-- About Content -->
+      <div class="w-full md:w-2/3">
+        <h3 class="text-2xl font-bold mb-2">Nishaanthini Gnanavel</h3>
+        <p class="text-gray-600 mb-4">
+          PhD student at CCDS, NTU |Machine Learning Engineer at H2O.ai |
+          Computer Science and Engineering Graduate at University of Moratuwa.
+        </p>
+        <p class="text-gray-700 mb-6">
+          I am passionate about Large Language Models (LLMs)
+          ,Data Visualization, Explaianable AI and data-driven problem solving. With experience at H2O.ai as a Machine Learning Engineer, I have worked on real-world AI 
+          applications. I enjoy exploring new challenges, building scalable 
+          AI solutions, and constantly learning emerging technologies.
+        </p>
+
+        <!-- Expertise -->
+        <div class="mb-6">
+          <h4 class="text-xl font-semibold mb-3">Top Skills</h4>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 bg-blue-600 rounded-full"></div>
+              <span>Large Language Models (LLM)</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 bg-blue-600 rounded-full"></div>
+              <span>Data Visualization</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 bg-blue-600 rounded-full"></div>
+              <span>Explainable AI</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-2 h-2 bg-blue-600 rounded-full"></div>
+              <span>Machine Learning</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Certifications -->
+        <!-- <div class="mb-6">
+          <h4 class="text-xl font-semibold mb-3">Certifications</h4>
+          <ul class="list-disc list-inside text-gray-700 space-y-1">
+            <li>Computer Vision and Image Processing Essentials</li>
+            <li>Introduction to Data Science</li>
+            <li>Python for Data Science</li>
+            <li>Fundamentals of Network Communication</li>
+            <li>DataStorm 3.0 – 1st Runner Up</li>
+          </ul>
+        </div> -->
+
+        <!-- Education -->
+        <div class="mb-6">
+          <h4 class="text-xl font-semibold mb-3">Education</h4>
+          <ul class="space-y-2">
+            <li class="flex flex-col">
+              <span class="font-medium">PhD</span>
+              <span class="text-gray-600">CCDS, NTU (2025 – present)</span>
+            </li>
+            <li class="flex flex-col">
+              <span class="font-medium">B.Sc. in Computer Science and Engineering</span>
+              <span class="text-gray-600">University of Moratuwa (2020 – 2024)</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Experience -->
+        <div>
+          <h4 class="text-xl font-semibold mb-3">Experience</h4>
+          <ul class="space-y-2">
+            <li class="flex flex-col">
+              <span class="font-medium">Machine Learning Engineer</span>
+              <span class="text-gray-600">H2O.ai | Jun 2024 – Jun 2025</span>
+            </li>
+            <li class="flex flex-col">
+              <span class="font-medium">Machine Learning Engineer Intern</span>
+              <span class="text-gray-600">H2O.ai | Jan 2023 – May 2024</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <!-- <div class="mt-6">
+          <h4 class="text-xl font-semibold mb-3">Contact</h4>
+          <p class="text-gray-700">📧 nishaanthini.19@cse.mrt.ac.lk</p>
+          <p class="text-gray-700">
+            🔗 <a href="https://www.linkedin.com/in/nishaanthinignanavel-a5950176" target="_blank" class="text-blue-600 hover:underline">
+              LinkedIn Profile
+            </a>
+          </p>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</section>
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold mb-2">Projects</h2>
+          <div class="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
+          <p class="max-w-2xl mx-auto text-gray-600">
+            Explore some of my recent research and development projects that showcase my expertise and interests.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Project 1 -->
+          <div class="bg-white rounded-lg overflow-hidden shadow-lg transition-transform hover:scale-[1.02]">
+            <div class="h-60 overflow-hidden">
+              <img
+                src="assets/segxperts.png"
+                alt="AI-Powered Analytics Platform" class="w-full h-full object-cover"/>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">SegXperts - Segmentations from Explanations</h3>
+              <p class="text-gray-600 mb-4"> A web application which uses explainable artificial intelligence (XAI) to perform detailed segmentation of cervical cell images to help in cervical cancer cell detection. It aims to provide transparency into its AI-driven analysis by offering segmentation masks, XAI heatmaps, and key cellular descriptors such as nucleus-to-cytoplasm (N:C) ratio.</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full">Deeplearning</span>
+                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full">XAI</span>
+                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full">Python</span>
+                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full">React</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2 -->
+          <!-- <div class="bg-white rounded-lg overflow-hidden shadow-lg transition-transform hover:scale-[1.02]">
+            <div class="h-60 overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
+                alt="Smart City Infrastructure" class="w-full h-full object-cover"/>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">Smart City Infrastructure</h3>
+              <p class="text-gray-600 mb-4">IoT-based system for monitoring and optimizing urban resources and services.</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full">IoT</span>
+                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full">Data Analysis</span>
+                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full">Cloud Computing</span>
+              </div>
+            </div>
+          </div> -->
+
+          <!-- Project 3 -->
+          <!-- <div class="bg-white rounded-lg overflow-hidden shadow-lg transition-transform hover:scale-[1.02]">
+            <div class="h-60 overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                alt="Quantum Computing Simulator" class="w-full h-full object-cover"/>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">Quantum Computing Simulator</h3>
+              <p class="text-gray-600 mb-4">A web-based platform for simulating quantum algorithms and visualizing results.</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full">Quantum Computing</span>
+                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full">JavaScript</span>
+                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full">WebGL</span>
+              </div>
+            </div>
+          </div> -->
+
+          <!-- Project 4 -->
+          <!-- <div class="bg-white rounded-lg overflow-hidden shadow-lg transition-transform hover:scale-[1.02]">
+            <div class="h-60 overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1509391366360-2e959784a276?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80"
+                alt="Sustainable Energy Monitoring" class="w-full h-full object-cover"/>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold mb-2">Sustainable Energy Monitoring</h3>
+              <p class="text-gray-600 mb-4">Real-time dashboard for monitoring renewable energy production and consumption.</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full">Data Visualization</span>
+                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full">React</span>
+                <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full">Node.js</span>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+      </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section id="publications" class="py-20 bg-white">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold mb-2">Publications</h2>
+      <div class="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
+      <p class="max-w-2xl mx-auto text-gray-600">
+        Research papers and academic publications from my Final Year Project on Explainable AI for Cervical Cancer Screening.
+      </p>
+    </div>
+
+    <div class="max-w-4xl mx-auto">
+
+      <!-- ICARC 2024 -->
+      <div class="p-6 bg-gray-50 border-l-4 border-blue-600 mb-6 shadow-sm">
+        <h3 class="text-xl font-bold mb-2 text-blue-800">Interpretable Cervical Cell Classification: A Comparative Analysis</h3>
+        <p class="text-gray-600 mb-2"><span class="font-medium">Authors:</span> N. Gnanavel, P. Inparaj, N. Sritharan, D. Meedeniya, P. Yogarajah</p>
+        <p class="text-gray-600 mb-2"><span class="font-medium">Conference:</span> 2024 4th International Conference on Advanced Research in Computing (ICARC), Belihuloya, Sri Lanka</p>
+        <p class="text-gray-600 mb-4"><span class="font-medium">Year:</span> 2024</p>
+        <a href="https://doi.org/10.1109/ICARC61713.2024.10499737" class="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center" target="_blank" rel="noopener noreferrer">
+          Read Publication
+          <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+          </svg>
+        </a>
+      </div>
+
+      <!-- SCSE 2024 -->
+      <div class="p-6 bg-white border-l-4 border-blue-600 mb-6 shadow-sm">
+        <h3 class="text-xl font-bold mb-2 text-blue-800">EnsembleCAM: Unified Visualization for Explainable Cervical Cancer Identification</h3>
+        <p class="text-gray-600 mb-2"><span class="font-medium">Authors:</span> N. Sritharan, N. Gnanavel, P. Inparaj, D. Meedeniya, P. Yogarajah</p>
+        <p class="text-gray-600 mb-2"><span class="font-medium">Conference:</span> 2024 International Research Conference on Smart Computing and Systems Engineering (SCSE), Colombo, Sri Lanka</p>
+        <p class="text-gray-600 mb-4"><span class="font-medium">Year:</span> 2024</p>
+        <a href="https://doi.org/10.1109/SCSE61872.2024.10550859" class="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center" target="_blank" rel="noopener noreferrer">
+          Read Publication
+          <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+          </svg>
+        </a>
+      </div>
+
+      <!-- IEEE Access 2025 -->
+      <div class="p-6 bg-gray-50 border-l-4 border-blue-600 mb-6 shadow-sm">
+        <h3 class="text-xl font-bold mb-2 text-blue-800">Explainable Artificial Intelligence Driven Segmentation for Cervical Cancer Screening</h3>
+        <p class="text-gray-600 mb-2"><span class="font-medium">Authors:</span> N. Sritharan, N. Gnanavel, P. Inparaj, D. Meedeniya, P. Yogarajah</p>
+        <p class="text-gray-600 mb-2"><span class="font-medium">Journal:</span> IEEE Access</p>
+        <p class="text-gray-600 mb-4"><span class="font-medium">Year:</span> 2025</p>
+        <a href="https://doi.org/10.1109/ACCESS.2025.3561178" class="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center" target="_blank" rel="noopener noreferrer">
+          Read Publication
+          <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="py-20 bg-gradient-to-br from-blue-50 to-indigo-50">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold mb-2">Achievements</h2>
+          <div class="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
+          <p class="max-w-2xl mx-auto text-gray-600">
+            Recognitions and milestones that highlight my professional journey.
+          </p>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+          <div class="relative">
+            <!-- Timeline Line -->
+            <div class="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 h-full w-1 bg-blue-200"></div>
+
+            <!-- Timeline Item 1 -->
+            <div class="relative mb-12 timeline-item">
+              <div class="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 -mt-2 w-5 h-5 rounded-full bg-blue-600 border-4 border-blue-100"></div>
+              <div class="ml-8 md:ml-0 md:mr-auto md:pr-12 md:pl-0 md:w-[calc(50%-20px)] timeline-content">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                  <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full mb-2">2024</span>
+                  <h3 class="text-xl font-bold mb-1">Best Paper Award in the Smart Computing Track</h3>
+                  <p class="text-gray-600 font-medium mb-2">International Research Conference on Smart Computing and Systems Engineering (SCSE), 2024</p>
+                  <p class="text-gray-600">Awarded for the paper titled "EnsembleCAM: Unified Visualization for Explainable Cervical Cancer Identification".</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Timeline Item 2 -->
+            <div class="relative mb-12 timeline-item">
+              <div class="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 -mt-2 w-5 h-5 rounded-full bg-blue-600 border-4 border-blue-100"></div>
+              <div class="ml-8 md:ml-0 md:ml-auto md:pl-12 md:pr-0 md:w-[calc(50%-20px)] timeline-content">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                  <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full mb-2">2023</span>
+                  <h3 class="text-xl font-bold mb-1">ChallengerX Champion</h3>
+                  <p class="text-gray-600 font-medium mb-2">IFS x Hatch, 2023</p>
+                  <p class="text-gray-600">SriLanka’s 1st AI/ML Incubator 
+programme and competition organized 
+by IFS x Hatch to build a solution to
+model any disaster event and
+determine the best response strategy.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Timeline Item 3 -->
+            <div class="relative mb-12 timeline-item">
+              <div class="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 -mt-2 w-5 h-5 rounded-full bg-blue-600 border-4 border-blue-100"></div>
+              <div class="ml-8 md:ml-0 md:mr-auto md:pr-12 md:pl-0 md:w-[calc(50%-20px)] timeline-content">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                  <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full mb-2">2023</span>
+                  <h3 class="text-xl font-bold mb-1">APAN56 Datathon - 2nd runnerup</h3>
+                  <p class="text-gray-600 font-medium mb-2"> Organized by APAN 
+and 4 state universities</p>
+                  <p class="text-gray-600">24 hr Datathon organized by APAN 
+and 4 state universities to build a 
+location recommendation solution for
+solar and wind projects based on
+meteorological data.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Timeline Item 4 -->
+            <div class="relative mb-12 timeline-item">
+              <div class="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 -mt-2 w-5 h-5 rounded-full bg-blue-600 border-4 border-blue-100"></div>
+              <div class="ml-8 md:ml-0 md:ml-auto md:pl-12 md:pr-0 md:w-[calc(50%-20px)] timeline-content">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                  <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 text-sm font-medium rounded-full mb-2">2022</span>
+                  <h3 class="text-xl font-bold mb-1">Datastorm 3.0 - 1st runnerup </h3>
+                  <p class="text-gray-600 font-medium mb-2">Data Analytics Competition organized 
+by Octave and Rotaract clubs of 
+University of Moratuwa and Faculty of 
+science, University of Colombo. </p>
+                 
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+<section id="contact" class="py-20 bg-gradient-to-r from-blue-50 to-white">
+  <div class="container mx-auto px-4">
+    <!-- Heading -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold mb-2 text-gray-800">Contact Me</h2>
+      <div class="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
+      <p class="text-gray-600">Let’s connect! Feel free to reach out through any of the platforms below.</p>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="flex flex-col md:flex-row justify-center gap-12 max-w-4xl mx-auto">
+      <div class="w-full md:w-2/3">
+        <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300">
+          <h3 class="text-2xl font-bold mb-6 text-gray-800">Get In Touch</h3>
+
+          <ul class="space-y-6 text-lg">
+            <li class="flex items-center space-x-4">
+              <div class="w-10 h-10 flex items-center justify-center bg-blue-100 text-blue-600 rounded-full shadow">
+                📧
+              </div>
+              <a href="mailto:gnishaanthini@gmail.com" class="text-gray-700 hover:text-blue-600 transition">
+                gnishaanthini@gmail.com
+              </a>
+            </li>
+
+            <li class="flex items-center space-x-4">
+              <div class="w-10 h-10 flex items-center justify-center bg-blue-100 text-blue-600 rounded-full shadow">
+                💻
+              </div>
+              <a href="https://github.com/gnishaanthini" target="_blank" class="text-gray-700 hover:text-blue-600 transition">
+                github.com/gnishaanthini
+              </a>
+            </li>
+
+            <li class="flex items-center space-x-4">
+              <div class="w-10 h-10 flex items-center justify-center bg-blue-100 text-blue-600 rounded-full shadow">
+                💼
+              </div>
+              <a href="https://www.linkedin.com/in/nishaanthini-gnanavel-a5950176/" target="_blank" class="text-gray-700 hover:text-blue-600 transition">
+                linkedin.com/in/gnishaanthini
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </main>
 
   <!-- Footer -->
-  <footer>
-    <p>© 2025 Nishaanthini Gnanavel | Hosted with GitHub Pages</p>
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-6 md:mb-0">
+          <h3 class="text-2xl font-bold mb-2">Gnanavel Nishaanthini</h3>
+          <p class="text-gray-400">Researcher • Developer • Innovator</p>
+        </div>
+        <div class="flex flex-col items-center md:items-end">
+          <!-- <p class="text-gray-400 mb-2" id="current-year">© 2025 Gnanavel Nishaanthini. All rights reserved.</p> -->
+          <!-- <div class="flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
+          </div> -->
+        </div>
+      </div>
+    </div>
   </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Header scroll effect
+    window.addEventListener('scroll', function () {
+      const header = document.getElementById('header');
+      if (window.scrollY > 10) {
+        header.classList.remove('header-transparent');
+        header.classList.add('header-scrolled');
+      } else {
+        header.classList.remove('header-scrolled');
+        header.classList.add('header-transparent');
+      }
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuIcon = document.getElementById('menuIcon');
+
+    menuToggle.addEventListener('click', function () {
+      mobileMenu.classList.toggle('active');
+      if (mobileMenu.classList.contains('active')) {
+        menuIcon.setAttribute('data-lucide', 'x');
+      } else {
+        menuIcon.setAttribute('data-lucide', 'menu');
+      }
+      if (window.lucide) lucide.createIcons();
+    });
+
+    // Smooth scrolling
+    function scrollToSection(id) {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        // Close mobile menu if open
+        mobileMenu.classList.remove('active');
+        menuIcon.setAttribute('data-lucide', 'menu');
+        if (window.lucide) lucide.createIcons();
+      }
+    }
+    window.scrollToSection = scrollToSection; // expose for buttons
+
+    // Update current year in footer
+    document.getElementById('current-year').textContent =
+      `© ${new Date().getFullYear()} John Doe. All rights reserved.`;
+
+    // Initialize Lucide icons after DOM ready (script is deferred)
+    document.addEventListener('DOMContentLoaded', function () {
+      if (window.lucide) lucide.createIcons();
+    });
+  </script>
 </body>
 </html>
